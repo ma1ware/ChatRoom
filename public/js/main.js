@@ -68,9 +68,19 @@ $(function() {
 			element.classList.add('myself');
 		}
 
-		element.innerHTML = '<p class="author">' + msg.name +
-				'</p><div class="message">' + msg.message + '</div>';
+		element.innerHTML = '<p class="author">' + stripscript(msg.name) +
+				'</p><div class="message">' + stripscript(msg.message) + '</div>';
 		$('.content-area').append(element);
 		element.scrollIntoView(false);
 	}
 });
+
+function stripscript(s) 
+{ 
+var pattern = new RegExp("[%--`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]")        //格式 RegExp("[在中间定义特殊过滤字符]")
+var rs = ""; 
+for (var i = 0; i < s.length; i++) { 
+ rs = rs+s.substr(i, 1).replace(pattern, ''); 
+}
+return rs;
+}
